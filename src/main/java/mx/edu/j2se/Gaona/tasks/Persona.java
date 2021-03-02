@@ -7,7 +7,7 @@ public class Persona {
     Float altura;
     String nacionalidad;
 
-    //Método cosntructor
+    //Metodo constructor
     public Persona (String nombre, int edad){
         this.nombre = nombre;
         this.edad = edad;

@@ -1,4 +1,5 @@
 package mx.edu.j2se.Gaona.tasks;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -10,6 +11,17 @@ import java.util.Scanner;
  * @versión 1.0
  */
 public class Task {
+
+    String monthInicial;
+    String monthFinal;
+    String dayInicial;
+    String dayFinal;
+    String monthNoRep;
+    int dayNoRep;
+    int interva;
+    int tiempo;
+    int from;
+    int to;
 
     //Atributos
 
@@ -49,23 +61,25 @@ public class Task {
 
     /**
      * Constructor de tarea no-repetitiva
+     *
      * @param title
      * @param time
      */
-    public void Task(String title, int time){
+    public void Task(String title, int time) {
         this.title = title;
         this.time = time;
     }
 
     /**
      * Constructor de tarea reptitiva
+     *
      * @param title
      * @param start
      * @param end
      * @param interval
      * @param veces
      */
-    public void Task(String title, int start, int end, int interval,int veces){
+    public void Task(String title, int start, int end, int interval, int veces) {
         this.title = title;
         this.start = start;
         this.end = end;
@@ -75,6 +89,7 @@ public class Task {
 
     /**
      * Get de la variable title
+     *
      * @return
      */
     public String getTitle() {
@@ -83,6 +98,7 @@ public class Task {
 
     /**
      * Set de la variable title
+     *
      * @param title
      */
     public void setTitle(String title) {
@@ -91,29 +107,31 @@ public class Task {
 
     /**
      * Activa una tarea
+     *
      * @return
      */
-    public boolean isActive(){
+    public boolean isActive() {
         return true;
     }
 
     /**
      * Set de la variable active
+     *
      * @param active
      */
-    public void setActive(boolean active){
+    public void setActive(boolean active) {
         this.active = active;
     }
 
     /**
      * Condicional, si la tarea es repetitiva regresa la variable start, si es no-repetitiva regresala variable time
+     *
      * @return
      */
     public int getTime() {
-        if (time == 0){
+        if (time == 0) {
             return start;
-        }
-        else{
+        } else {
             return time;
         }
 
@@ -122,16 +140,16 @@ public class Task {
     /**
      * Condicional, si la tarea es repetitiva, la convierte en no-repetitiva al preguntar por la variable time y
      * establecerla como nuevo parámetro
+     *
      * @param time
      */
     public void setTime(int time) {
-        if (time == 0){
+        if (time == 0) {
             System.out.println("Introduce el comienzo de tu tarea: ");
             Scanner console = new Scanner(System.in);
             //this.time = time;
             time = Integer.parseInt(console.nextLine());
-        }
-        else{
+        } else {
             this.time = time;
             System.out.println("time = " + time);
 
@@ -141,13 +159,13 @@ public class Task {
     /**
      * Condicional, si la tarea es no-reptitiva regresa la variable time, si la tarea es repetitiva regresa la variable
      * start
+     *
      * @return
      */
-    public int getStartTime(){
-        if(time > 0){
+    public int getStartTime() {
+        if (time > 0) {
             return time;
-        }
-        else{
+        } else {
             return start;
         }
     }
@@ -155,13 +173,13 @@ public class Task {
     /**
      * Condicional, si la tarea es no-reptitiva regresa la variable time, si la tarea es repetitiva regresa la variable
      * end
+     *
      * @return
      */
-    public int getEndTime(){
-        if(time > 0){
+    public int getEndTime() {
+        if (time > 0) {
             return time;
-        }
-        else{
+        } else {
             return end;
         }
 
@@ -170,25 +188,27 @@ public class Task {
     /**
      * Condicional, si la tarea es no-reptitiva regresa la variable interval, si la tarea es
      * repetitiva regresa 0
+     *
      * @return
      */
-    public int getRepeatInterval(){
-        if (time > 0){
+    public int getRepeatInterval() {
+        if (time > 0) {
             return 0;
-        }
-        else{
+        } else {
             return interval;
         }
     }
+
     /**
      * Condicional, si la tarea es no-repetitiva, la convierte en repetitiva al preguntar por las variables
      * start,end,interval y establecerla como nuevo parámetro
+     *
      * @param start
      * @param end
      * @param interval
      */
-    public void setTime(int start, int end, int interval){
-        if (time > 0){
+    public void setTime(int start, int end, int interval) {
+        if (time > 0) {
             //time = start;
             System.out.println("Introduce el tiempo de inicio: ");
             Scanner console = new Scanner(System.in);
@@ -203,8 +223,7 @@ public class Task {
             //this.interval = interval;
             interval = Integer.parseInt(console.nextLine());
 
-        }
-        else{
+        } else {
             //time=start;
             this.start = start;
             this.end = end;
@@ -216,14 +235,14 @@ public class Task {
 
     /**
      * método para visualizar si una tarea es repetitiva o no
+     *
      * @return
      */
-    public boolean isRepeated(){
-        if(time == 0){
+    public boolean isRepeated() {
+        if (time == 0) {
             System.out.println("Su tarea es repetitiva");
             return true;
-        }
-        else{
+        } else {
             System.out.println("Su tarea no es repetitiva");
             return false;
         }
@@ -236,13 +255,14 @@ public class Task {
      * al usuario, en donde se plantea el número de repeticiones faltantes. Si la repetición es mayor a 0 se calcula
      * el tiempo que falta para la siguiente repetición y dependiendo si se pasa del formato 2400 se ajusta con una
      * resta. Por el otro lado si el número de veces es igual a 0, el método regresa un -1.
+     *
      * @param current
      * @return
      */
-    public int nextTimeAfter(int current){
+    public int nextTimeAfter(int current) {
         this.current = current;
         if (time == 0) {
-            if (current > start && current < end){
+            if (current > start && current < end) {
                 System.out.println("Cuantas repeticiones faltan: ");
                 Scanner console = new Scanner(System.in);
                 veces = Integer.parseInt(console.nextLine());
@@ -252,27 +272,51 @@ public class Task {
                         current = current - interval;
                         System.out.println("La actividad empezará a las: " + current);
 
-                    }
-                    else {
+                    } else {
                         System.out.println("La actividad empezará a las: " + current);
                     }
-                }
-                else{
+                } else {
                     return -1;
                 }
-            }
-            else{
+            } else {
                 return -1;
             }
 
-        }
-        else{
+        } else {
             return 0;
         }
         return 0;
     }
+
+    public void setTarea(String dayInicial,
+                         String dayFinal){
+        this.dayInicial=dayInicial;
+        this.dayFinal=dayFinal;
+
+    }
+
+
+
+    /*public String getTareanorep(){
+        from = dayInicial;
+        to = dayFinal;
+        return
+                "titulo" + title + "from" + monthInicial + " " + from + " to " + monthFinal +  " " + to + " every "
+                        + interval + "hours";
+    }*/
+
+    public void setTarea(String title, String monthNoRep, int dayNoRep, int time){
+        this.title=title;
+        this.monthNoRep=monthNoRep;
+        this.dayNoRep=dayNoRep;
+        this.time=time;
+
+    }
+
 }
 
+    /*Task arrayTask[]=new Task[3]
+arrayTask[0]=new Task ("", "", , , , , , );*/
 
 
 
